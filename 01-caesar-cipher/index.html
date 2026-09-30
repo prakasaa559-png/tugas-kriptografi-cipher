@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caesar Cipher</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f4f7;
+            margin: 0;
+            padding: 40px;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        textarea,
+        input {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 12px;
+            margin-top: 8px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 12px 20px;
+            margin-top: 20px;
+            margin-right: 10px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .hasil {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f0f0f0;
+            border-radius: 8px;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Caesar Cipher</h1>
+
+    <label>Pesan</label>
+
+    <textarea id="pesan" rows="5"
+        placeholder="Masukkan pesan..."></textarea>
+
+    <label>Kunci / Pergeseran</label>
+
+    <input type="number" id="kunci" min="0" max="25" value="3">
+
+    <button onclick="enkripsi()">Enkripsi</button>
+
+    <button onclick="dekripsi()">Dekripsi</button>
+
+    <div class="hasil">
+
+        <strong>Hasil:</strong>
+
+        <p id="hasil">Belum ada hasil.</p>
+
+    </div>
+
+</div>
+
+<script>
+
+function caesar(teks, kunci) {
+
+    let hasil = "";
+
+    for (let i = 0; i < teks.length; i++) {
+
+        let karakter = teks[i];
+
+        if (karakter.match(/[a-z]/i)) {
+
+            let kode = teks.charCodeAt(i);
+
+            let dasar;
+
+            if (kode >= 65 && kode <= 90) {
+                dasar = 65;
+            } else {
+                dasar = 97;
+            }
+
+            karakter = String.fromCharCode(
+                ((kode - dasar + kunci + 26) % 26) + dasar
+            );
+        }
+
+        hasil += karakter;
+    }
+
+    return hasil;
+}
+
+
+function enkripsi() {
+
+    let pesan = document.getElementById("pesan").value;
+
+    let kunci = parseInt(
+        document.getElementById("kunci").value
+    );
+
+    let hasil = caesar(pesan, kunci);
+
+    document.getElementById("hasil").innerText = hasil;
+}
+
+
+function dekripsi() {
+
+    let pesan = document.getElementById("pesan").value;
+
+    let kunci = parseInt(
+        document.getElementById("kunci").value
+    );
+
+    let hasil = caesar(pesan, -kunci);
+
+    document.getElementById("hasil").innerText = hasil;
+}
+
+</script>
+
+</body>
+</html>
