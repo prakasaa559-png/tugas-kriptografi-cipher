@@ -13,11 +13,15 @@ Aplikasi untuk melakukan enkripsi dan dekripsi menggunakan Vigenère Cipher.
 ### 3. Columnar Transposition Cipher
 Aplikasi untuk melakukan enkripsi dan dekripsi menggunakan Columnar Transposition Cipher.
 
-## Teknologi
+## Bahasa Pemograman
 
 - HTML
 - CSS
 - JavaScript
 
-## Nama
-Moch Arief Budi Prakasa
+## Identitas
+Nama: Moch Arief Budi Prakasa
+Project: Tugas Sistem Cipher
+NIM: 312410532
+Kelas: I242B
+Mata Kuliah: Kriptografi
