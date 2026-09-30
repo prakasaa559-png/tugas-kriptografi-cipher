@@ -21,7 +21,11 @@ Aplikasi untuk melakukan enkripsi dan dekripsi menggunakan Columnar Transpositio
 
 ## Identitas
 Nama: Moch Arief Budi Prakasa
+
 Project: Tugas Sistem Cipher
+
 NIM: 312410532
+
 Kelas: I242B
+
 Mata Kuliah: Kriptografi
