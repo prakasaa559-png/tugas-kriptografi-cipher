@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Columnar Transposition Cipher</title>
+
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f4f7;
+            padding: 40px;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        textarea,
+        input {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 12px;
+            margin-top: 8px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 12px 20px;
+            margin-top: 20px;
+            margin-right: 10px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .hasil {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f0f0f0;
+            border-radius: 8px;
+            word-wrap: break-word;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Columnar Transposition Cipher</h1>
+
+    <label>Pesan</label>
+
+    <textarea
+        id="pesan"
+        rows="5"
+        placeholder="Masukkan pesan...">
+    </textarea>
+
+    <label>Kunci</label>
+
+    <input
+        type="text"
+        id="kunci"
+        placeholder="Contoh: TOMBAK">
+
+    <button onclick="enkripsi()">
+        Enkripsi
+    </button>
+
+    <button onclick="dekripsi()">
+        Dekripsi
+    </button>
+
+    <div class="hasil">
+
+        <strong>Hasil:</strong>
+
+        <p id="hasil">
+            Belum ada hasil.
+        </p>
+
+    </div>
+
+</div>
+
+
+<script>
+
+function enkripsi() {
+
+    let teks =
+        document.getElementById("pesan").value
+        .replace(/\s/g, "")
+        .toUpperCase();
+
+    let kunci =
+        document.getElementById("kunci").value
+        .replace(/\s/g, "")
+        .toUpperCase();
+
+    if (teks === "" || kunci === "") {
+
+        alert("Pesan dan kunci harus diisi!");
+
+        return;
+
+    }
+
+    let jumlahKolom = kunci.length;
+
+    let hasil = "";
+
+    for (let kolom = 0; kolom < jumlahKolom; kolom++) {
+
+        for (let i = kolom; i < teks.length; i += jumlahKolom) {
+
+            hasil += teks[i];
+
+        }
+
+    }
+
+    document.getElementById("hasil").innerText = hasil;
+
+}
+
+
+function dekripsi() {
+
+    let teks =
+        document.getElementById("pesan").value
+        .replace(/\s/g, "")
+        .toUpperCase();
+
+    let kunci =
+        document.getElementById("kunci").value
+        .replace(/\s/g, "")
+        .toUpperCase();
+
+    if (teks === "" || kunci === "") {
+
+        alert("Pesan dan kunci harus diisi!");
+
+        return;
+
+    }
+
+    let jumlahKolom = kunci.length;
+
+    let panjangBaris =
+        Math.ceil(teks.length / jumlahKolom);
+
+    let hasil = "";
+
+    let index = 0;
+
+    let tabel = [];
+
+    for (let i = 0; i < panjangBaris; i++) {
+
+        tabel[i] = [];
+
+    }
+
+    for (let kolom = 0; kolom < jumlahKolom; kolom++) {
+
+        for (let baris = 0; baris < panjangBaris; baris++) {
+
+            if (index < teks.length) {
+
+                tabel[baris][kolom] = teks[index];
+
+                index++;
+
+            }
+
+        }
+
+    }
+
+    for (let baris = 0; baris < panjangBaris; baris++) {
+
+        for (let kolom = 0; kolom < jumlahKolom; kolom++) {
+
+            if (tabel[baris][kolom]) {
+
+                hasil += tabel[baris][kolom];
+
+            }
+
+        }
+
+    }
+
+    document.getElementById("hasil").innerText = hasil;
+
+}
+
+</script>
+
+</body>
+
+</html>
